@@ -27,8 +27,8 @@ steps:
 substitutions:
   _REGION: us-central1
   _SERVICE_NAME: rails-cat-album
-  _INSTANCE_NAME: cat-album
-  _SECRET_NAME: rails-master-key
+  _INSTANCE_NAME: backend
+  _SECRET_NAME: RAILS_DEC_KEY
 
 availableSecrets:
   secretManager:
