@@ -1,21 +1,27 @@
-FROM ruby:3.0.2
+FROM ruby:3.0.3
 
 RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-RUN apt-get update && apt-get install -y nodejs sqlite3 
+RUN apt-get update && apt-get install -y nodejs 
 
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
+COPY Gemfile Gemfile.lock ./
 
-COPY Gemfile /usr/src/app/
-COPY Gemfile.lock /usr/src/app/
-RUN gem update --system
-RUN bundle config set --local without 'development test'
-RUN bundle install
+RUN gem install bundler && \
+    bundle config set --local deployment 'true' && \
+    bundle config set --local without 'development test' && \
+    bundle install
 
-COPY . /usr/src/app
+ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
+# Redirect Rails log to STDOUT for Cloud Run to capture
+ENV RAILS_LOG_TO_STDOUT=true
+# [START cloudrun_rails_dockerfile_key]
+ARG MASTER_KEY
+ENV RAILS_MASTER_KEY=${MASTER_KEY}
+# [END cloudrun_rails_dockerfile_key]
+
+COPY . /app
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
