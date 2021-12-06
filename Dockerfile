@@ -1,11 +1,10 @@
 FROM ruby:3.0.3
 
-RUN mkdir -p /usr/src/app
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y nodejs 
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock /app/
 
 RUN gem install bundler && \
     bundle config set --local deployment 'true' && \
