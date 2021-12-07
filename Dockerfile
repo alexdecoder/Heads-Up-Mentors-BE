@@ -1,26 +1,14 @@
-FROM ruby:3.0.3
+FROM ruby:3.0.2
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+WORKDIR /headsup-b
+COPY Gemfile /headsup-b/Gemfile
+COPY Gemfile.lock /headsup-b/Gemfile.lock
+RUN gem install bundler
+RUN bundle install
 
-WORKDIR /app
-
-RUN apt-get update && apt-get install -y nodejs 
-
-COPY Gemfile Gemfile.lock /app/
-
-RUN gem install bundler && \
-    bundle config set --local deployment 'true' && \
-    bundle config set --local without 'development test' && \
-    bundle install
-
-ENV RAILS_ENV=production
-ENV RAILS_SERVE_STATIC_FILES=true
-# Redirect Rails log to STDOUT for Cloud Run to capture
-ENV RAILS_LOG_TO_STDOUT=true
-# [START cloudrun_rails_dockerfile_key]
-ARG MASTER_KEY
-ENV RAILS_MASTER_KEY=${MASTER_KEY}
-# [END cloudrun_rails_dockerfile_key]
-
-COPY . /app
-
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
+
 CMD ["rails", "server", "-b", "0.0.0.0"]
