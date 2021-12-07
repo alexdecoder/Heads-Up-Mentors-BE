@@ -30,4 +30,4 @@ production:
   database: <%= ENV["PRODUCTION_DB_NAME"] %>
   username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
   password: <%= Rails.application.credentials.gcp[:db_password] %>
-  host: "10.71.96.6"
+  host: "35.193.223.62"
