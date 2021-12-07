@@ -25,7 +25,7 @@ steps:
     secretEnv: ["RAILS_KEY"]
 
 substitutions:
-  _REGION: us-central1-f
+  _REGION: us-central1
   _SERVICE_NAME: backend
   _INSTANCE_NAME: hum-db
   _SECRET_NAME: RAILS_DEC_KEY
