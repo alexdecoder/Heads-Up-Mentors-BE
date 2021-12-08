@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM ruby:2.7.5
 RUN apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR /app
