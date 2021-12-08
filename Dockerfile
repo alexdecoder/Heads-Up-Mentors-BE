@@ -4,7 +4,7 @@ RUN apt-get update -qq && apt-get install -y nodejs
 WORKDIR /app
 
 # Application dependencies
-COPY Gemfile ./
+COPY Gemfile Gemfile.lock ./
 
 RUN gem install bundler && \
     bundle config set --local deployment 'true' && \
