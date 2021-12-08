@@ -70,5 +70,5 @@ production:
   database: <%= ENV["PRODUCTION_DB_NAME"] %>
   username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
   password: <%= Rails.application.credentials.gcp[:db_password] %>
-  socket: "/cloudsql/<%= ENV["CLOUD_SQL_CONNECTION_NAME"] %>"
+  socket: "/cloudsql/test"
 # [END cloudrun_rails_database]
