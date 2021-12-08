@@ -13,6 +13,14 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
 
+  - id: proxy-install
+    name: gcr.io/cloud-builders/yarn
+    entrypoint: sh
+    args:
+      - "-c"
+      - "wget https://storage.googleapis.com/cloudsql-proxy/v1.20.1/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && chmod +x cloud_sql_proxy"
+    waitFor: ["-"]
+
   - id: "apply migrations"
     name: "gcr.io/google-appengine/exec-wrapper"
     entrypoint: "bash"
