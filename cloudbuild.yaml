@@ -21,7 +21,7 @@ steps:
 
 substitutions:
   _REGION: us-central1
-  _SERVICE_NAME: hum-backend
+  _SERVICE_NAME: hum-server
   _INSTANCE_NAME: humdb
   _SECRET_NAME: rails-master-key
 
