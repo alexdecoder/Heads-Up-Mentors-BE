@@ -66,9 +66,9 @@ test:
 #
 # [START cloudrun_rails_database]
 production:
-  <<: *default
-  database: <%= ENV["PRODUCTION_DB_NAME"] %>
-  username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
-  password: <%= Rails.application.credentials.gcp[:db_password] %>
-  socket: "/cloudsql/headsupmentors:us-central1:humdb"
+  #<<: *default
+  #database: <%= ENV["PRODUCTION_DB_NAME"] %>
+  #username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
+  #password: <%= Rails.application.credentials.gcp[:db_password] %>
+  url: "postgresql://<%= ENV["PRODUCTION_DB_USERNAME"] %>:<%= Rails.application.credentials.gcp[:db_password] %>@35.223.82.21:5432/<%= ENV["PRODUCTION_DB_NAME"] %>?timeout=5000&connect_timeout=5&pool=10"
 # [END cloudrun_rails_database]
