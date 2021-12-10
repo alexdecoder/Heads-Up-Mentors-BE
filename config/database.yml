@@ -9,6 +9,7 @@ default: &default
 development:
   <<: *default
   database: rails_hum
+  
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -66,10 +67,11 @@ test:
 #
 # [START cloudrun_rails_database]
 production:
-  <%= puts Rails.application.credentials.gcp[:db_password] %>
+  <%# puts Rails.application.credentials.gcp[:db_password] %>
   <<: *default
+  <%= puts Dir.glob('/cloudsql/') %>
   #database: <%# ENV["PRODUCTION_DB_NAME"] %>
   #username: <%# ENV["PRODUCTION_DB_USERNAME"] %>
   #password: <%# Rails.application.credentials.gcp[:db_password] %>
-  url: "postgresql://hum-server:@35.223.82.21:5432/hum-base?timeout=5000&connect_timeout=5&pool=10"
+  url: "postgresql://hum-server:vhwOfoMaCBgx1o1d@35.223.82.21:5432/hum-base?timeout=5000&connect_timeout=5&pool=10"
 # [END cloudrun_rails_database]
