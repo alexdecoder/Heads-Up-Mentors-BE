@@ -15,15 +15,10 @@ RUN gem install bundler && \
 # Copy application code to the container image
 COPY . /app
 
-ENV RAILS_ENV=production
-ENV RAILS_SERVE_STATIC_FILES=true
-# Redirect Rails log to STDOUT for Cloud Run to capture
-ENV RAILS_LOG_TO_STDOUT=true
-# [START cloudrun_rails_dockerfile_key]
-ARG MASTER_KEY
-ENV RAILS_MASTER_KEY=${MASTER_KEY}
-# [END cloudrun_rails_dockerfile_key]
+#ENV RAILS_ENV=production
+#ENV RAILS_SERVE_STATIC_FILES=true
+#ENV RAILS_LOG_TO_STDOUT=true
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
