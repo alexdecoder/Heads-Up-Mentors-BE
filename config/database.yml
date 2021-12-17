@@ -8,7 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: rails_hum
+  #database: rails_hum
+  port: 5432 
+  dbname: humdatabase
+  user: humuser 
+  password: 4n@??#Xf^hZn.xL5K@sN&NR2gsM;P?:@U>ZBhJGBuDc
   
 
   # The specified database role being used to connect to postgres.
@@ -65,12 +69,11 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-# [START cloudrun_rails_database]
+
 production:
   <<: *default
-  <%=puts(ENV["CLOUD_SQL_CONNECTION_NAME"] )%>
-  database: <%= ENV["PRODUCTION_DB_NAME"] %>
-  username: <%= ENV["PRODUCTION_DB_USERNAME"] %>
-  password: <%= Rails.application.credentials.gcp[:db_password] %>
-  socket: "/cloudsql/headsupmentors:us-central1:humdb"
-# [END cloudrun_rails_database]
+  database: humdb
+  username: humuser
+  password: 4n@??#Xf^hZn.xL5K@sN&NR2gsM;P?:@U>ZBhJGBuDc
+  host: humdbserv.database.windows.net
+
