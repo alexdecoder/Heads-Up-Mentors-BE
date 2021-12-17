@@ -1,16 +1,13 @@
 FROM ruby:2.7.5
-RUN apt-get update -qq && apt-get install -y nodejs
 
 WORKDIR /app
 
-# Application dependencies
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN gem install bundler
+
 COPY Gemfile Gemfile.lock ./
 
-RUN gem install bundler && \
-    bundle config set --local deployment 'true' && \
-    bundle config set --local without 'development test' && \
-    bundle install
-
+RUN bundle install
 
 # Copy application code to the container image
 COPY . /app
