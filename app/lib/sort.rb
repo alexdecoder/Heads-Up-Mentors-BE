@@ -1,8 +1,8 @@
 require 'pp'
 
-class Algo
+class Sort
     def self.sort_students
-        # Randomly pair students into mentors based on subjects if unpaired after algo completed
+        # Randomly pair students into mentors based on subjects if unpaired after Sort completed
         # Prioritize the mentors without students for pairing
         unsorted_students = Student.where(paired: false).or(Student.where paired: nil)
         unsorted_students.find_each do |student|

@@ -4,9 +4,9 @@ require 'csv'
 
 class ApiController < ApplicationController
     def test
-        Object.send :remove_const, :Algo
+        Object.send :remove_const, :Sort
         load 'sort'
-        Algo.sort_students
+        Sort.sort_students
 
         render plain: 'done.'
     end
