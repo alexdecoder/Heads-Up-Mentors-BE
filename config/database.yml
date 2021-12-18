@@ -7,8 +7,10 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  url: "postgresql://db:YbZCe9ynWQNQJF15@app-90892860-8dfb-4e4f-ad4d-e5da66c1d45b-do-user-1865927-0.b.db.ondigitalocean.com:25060/db?sslmode=require"
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: db/development.sqlite3
   
 
   # The specified database role being used to connect to postgres.
