@@ -18,4 +18,5 @@ ENV RAILS_LOG_TO_STDOUT=true
 
 EXPOSE 80
 
+RUN chmod +x start.sh
 CMD ["./start.sh"]
