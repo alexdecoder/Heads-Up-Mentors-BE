@@ -18,4 +18,4 @@ ENV RAILS_LOG_TO_STDOUT=true
 
 EXPOSE 80
 
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "80"]
+CMD [".", "/app/start.sh"]

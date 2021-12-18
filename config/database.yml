@@ -8,11 +8,7 @@ default: &default
 
 development:
   <<: *default
-  #database: rails_hum
-  port: 5432 
-  dbname: humdatabase
-  user: humuser 
-  password: 4n@??#Xf^hZn.xL5K@sN&NR2gsM;P?:@U>ZBhJGBuDc
+  url: "postgresql://db:YbZCe9ynWQNQJF15@app-90892860-8dfb-4e4f-ad4d-e5da66c1d45b-do-user-1865927-0.b.db.ondigitalocean.com:25060/db?sslmode=require"
   
 
   # The specified database role being used to connect to postgres.
@@ -72,8 +68,5 @@ test:
 
 production:
   <<: *default
-  database: humdb
-  username: humuser
-  password: 4n@??#Xf^hZn.xL5K@sN&NR2gsM;P?:@U>ZBhJGBuDc
-  host: humdbserv.database.windows.net
+  url: "postgresql://db:<%= Rails.application.credentials.do[:db_password] %>@app-90892860-8dfb-4e4f-ad4d-e5da66c1d45b-do-user-1865927-0.b.db.ondigitalocean.com:25060/db?sslmode=require"
 
