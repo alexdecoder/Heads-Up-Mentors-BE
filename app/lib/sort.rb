@@ -26,7 +26,7 @@ class Sort
             # Check which mentors have matching subjects
             buffer_hold = []
             mentor_buffer.each do |mentor|
-                if (mentor.subjects - student.subjects).count != mentor.subjects.count 
+                if (mentor.subjects - student.subjects).count != mentor.subjects.count
                     buffer_hold.append mentor
                 end
             end
@@ -39,7 +39,7 @@ class Sort
                 Thursday: 3,
                 Friday: 4,
             }
-            
+
             catch :completed do
                 mentor_buffer.each do |mentor|
                     student.days_available.each do |day|
@@ -49,10 +49,10 @@ class Sort
                                 buffer.each do |k, v|
                                     if time == k && !v
                                         mentor.students << student # add student to matched mentor list
-    
+
                                         mentor.times[day_mapping[day.to_sym]][k] = true
                                         mentor.save
-    
+
                                         student.paired = true
                                         student.save
 
@@ -64,6 +64,14 @@ class Sort
                     end
                 end
             end
+
+            # This block of code will identify all unpaired students and place them
+            # with mentors prioritizing the mentors that have no pairings
+            #unpaired_students = Student.where(paired: false)
+            #unpaired_mentors = Mentor.where.missing(:student)
+            #unpaired_students.each do |student|
+
+            #end
         end
     end
 end

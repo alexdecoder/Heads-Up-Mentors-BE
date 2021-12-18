@@ -101,6 +101,8 @@ class ApiController < ApplicationController
                         i += 1
                     end
 
+                    Sort.sort_students
+
                     render json: {
                         result: 'value',
                         data: 'done',
@@ -155,6 +157,8 @@ class ApiController < ApplicationController
                         )
                     end
                 end
+
+                Sort.sort_students
 
                 render json: csv
             else
