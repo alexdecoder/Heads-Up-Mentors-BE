@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_11_09_194931) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "mentors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -26,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_194931) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.bigint "mentor_id"
+    t.integer "mentor_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
