@@ -18,6 +18,7 @@ test:
 
 production:
   <<: *default
+  <%= puts ENV['DATABASE_URL'] %>
   url: "postgresql://db:<%= Rails.application.credentials.do[:db_password] %>@<%= ENV['DATABASE_URL'] %>:25060/db?sslmode=require"
-  #url: 'postgresql://user@localhost'
+  # url: 'postgresql://user@localhost'
 
