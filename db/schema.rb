@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_09_194931) do
+ActiveRecord::Schema.define(version: 2022_01_10_055846) do
 
   create_table "mentors", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_194931) do
     t.string "subjects"
     t.string "days_available"
     t.string "available_times"
+    t.boolean "isExactMatch"
     t.index ["mentor_id"], name: "index_students_on_mentor_id"
   end
 

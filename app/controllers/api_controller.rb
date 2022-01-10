@@ -44,7 +44,7 @@ class ApiController < ApplicationController
 
             response_buffer[:data][:students].append(
                 {
-                    status: student.paired,
+                    status: student.isExactMatch,
                     name: student.name,
                     daysAvailable: student.days_available,
                     timesAvailable: student.available_times,

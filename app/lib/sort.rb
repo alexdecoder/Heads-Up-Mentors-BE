@@ -53,6 +53,7 @@ class Sort
                                         mentor.save
 
                                         student.paired = true
+                                        student.isExactMatch = true
                                         student.save
 
                                         throw :completed
@@ -77,6 +78,7 @@ class Sort
                 unpaired_mentor.save
 
                 unpaired_student.paired = true
+                unpaired_student.isExactMatch = false
                 unpaired_student.save
 
                 index += 1
@@ -88,6 +90,7 @@ class Sort
                 unpaired_mentor.save
 
                 unpaired_student.paired = true
+                unpaired_student.isExactMatch = false
                 unpaired_student.save
 
                 index += 1
@@ -104,6 +107,7 @@ class Sort
             mentor.save
 
             unpaired_student.paired = true
+            unpaired_student.isExactMatch = false
             unpaired_student.save
         end
     end
