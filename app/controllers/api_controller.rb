@@ -117,6 +117,7 @@ class ApiController < ApplicationController
                 render plain: params[:a]
             when "importmentors"
                 if params.has_key?(:csv)
+                    Student.delete_all
                     Mentor.delete_all
 
                     column_mapping = {

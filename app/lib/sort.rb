@@ -5,8 +5,7 @@ class Sort
         # Randomly pair students into mentors based on subjects if unpaired after Sort completed
         # Prioritize the mentors without students for pairing
         unsorted_students = Student.where(paired: false).or(Student.where paired: nil)
-        unsorted_students.find_each do |student|
-            puts '-----' + student.name + '-----'
+        unsorted_students.each do |student|
             # Start by querying all available mentors with appropriate gender
             if student.genpref == 0
                 mentor_buffer = Mentor.all
@@ -68,28 +67,44 @@ class Sort
 
         # This block of code will identify all unpaired students and place them
         # with mentors prioritizing the mentors that have no pairings
-        unpaired_students = Student.where(paired: false)
         unpaired_mentors = Mentor.where.missing(:students)
-        unpaired_students.each do |unpaired_student|
-            unpaired_mentors.each do |mentor|
-                if (unpaired_student.subjects - mentor.subjects).count != unpaired_student.subjects.count
-                    mentor.students << unpaired_student
-                    mentor.save
+        unpaired_students = Student.where(paired: false).or(Student.where(paired: nil))
+        index = 0
+        if unpaired_mentors.count < unpaired_students.count
+            unpaired_mentors.each do |unpaired_mentor|
+                unpaired_student = Student.offset(index).first
+                unpaired_mentor.students << unpaired_student
+                unpaired_mentor.save
 
-                    unpaired_student.paired = true
-                    unpaired_student.save
+                unpaired_student.paired = true
+                unpaired_student.save
 
-                    puts("paired " + mentor.name + " to " + unpaired_student.name)
-                end
+                index += 1
+            end
+        else
+            unpaired_students.each do |unpaired_student|
+                unpaired_mentor = Mentor.offset(index).first
+                unpaired_mentor.students << unpaired_student
+                unpaired_mentor.save
+
+                unpaired_student.paired = true
+                unpaired_student.save
+
+                index += 1
             end
         end
 
         # By this point, all students with subjects matching those of mentors
         # without students will now be paired. The remaining students are to
         # be paired randomly
-        unpaired_students = Student.where(paired: false)
+        unpaired_students = Student.where(paired: false).or(Student.where(paired: nil))
         unpaired_students.each do |unpaired_student|
-            (Mentor.offset(rand(Mentor.count)).first!.students << unpaired_student).save
+            mentor = Mentor.offset(rand(Mentor.count)).first!
+            mentor.students << unpaired_student
+            mentor.save
+
+            unpaired_student.paired = true
+            unpaired_student.save
         end
     end
 end
