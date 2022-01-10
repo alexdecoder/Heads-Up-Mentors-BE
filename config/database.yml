@@ -18,7 +18,5 @@ test:
 
 production:
   <<: *default
-  <%= puts ENV['DATABASE_URL'] %>
-  url: "ENV['DATABASE_URL']"
-  # url: 'postgresql://user@localhost'
+  url: "<%= ENV['DATABASE_URL'] %>"
 
